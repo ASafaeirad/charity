@@ -1,0 +1,8 @@
+{
+  "exclude": "@fullstacksjs/tsconfig/react",
+  "compilerOptions": {
+    "types": ["react/next", "react-dom/next"]
+  },
+  "include": ["web"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
