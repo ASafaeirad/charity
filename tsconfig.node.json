@@ -1,8 +1,12 @@
 {
+  "exclude": ["@fullstacksjs"],
   "compilerOptions": {
-    "composite": true,
-    "module": "esnext",
-    "moduleResolution": "node"
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "target": "ESNext",
+    "moduleResolution": "node",
+    "composite": true
   },
-  "include": ["vite.config.ts"]
+  "include": ["vite.config.ts", "api"]
 }

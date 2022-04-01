@@ -3,30 +3,41 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "vite",
+    "dev": "ts-node-dev api/src/main.ts -p tsconfig.node.json",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "private": true,
   "dependencies": {
-    "react": "^18.0.0-beta-24dd07bd2-20211208",
-    "react-dom": "^18.0.0-beta-24dd07bd2-20211208"
+    "@prisma/client": "3.11.0",
+    "dotenv": "16.0.0",
+    "express": "5.0.0-beta.1",
+    "react": "18.0.0",
+    "react-dom": "18.0.0",
+    "reflect-metadata": "0.1.13"
   },
   "devDependencies": {
     "@fullstacksjs/eslint-config": "8.2.0",
     "@fullstacksjs/toolbox": "2.14.0",
     "@fullstacksjs/tsconfig": "0.6.0",
+    "@types/express": "4.17.13",
     "@types/node": "16.11.7",
     "@types/react": "17.0.41",
     "@types/react-dom": "17.0.14",
     "@vitejs/plugin-react": "1.2.0",
     "eslint": "8.11.0",
     "prettier": "2.6.0",
+    "prisma": "3.11.0",
+    "ts-node-dev": "1.1.8",
     "typescript": "4.6.2",
     "vite": "2.8.6"
   },
   "volta": {
     "node": "17.7.2",
     "npm": "8.5.5"
+  },
+  "prisma": {
+    "schema": "./api/prisma/schema.prisma",
+    "seed": "ts-node --project tsconfig.base.json -r tsconfig-paths/register ./api/prisma/seed.ts"
   }
 }

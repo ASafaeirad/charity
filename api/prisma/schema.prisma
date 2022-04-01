@@ -1,0 +1,222 @@
+datasource codeit {
+  provider = "postgresql"
+  url      = env("DATABASE_URI")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../node_modules/.prisma/client"
+}
+
+model Admin {
+  id String @id @default(uuid())
+
+  username String
+  password String
+}
+
+model Family {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  household   Member? @relation("FamilyHousehold", fields: [householdId], references: [id])
+  householdId Int?    @unique
+
+  referral  Referer? @relation(fields: [refererId], references: [id])
+  refererId Int?
+
+  severity Severity
+
+  members Member[] @relation("FamilyMemeber")
+}
+
+model Referer {
+  id Int @id @default(autoincrement())
+
+  name   String?
+  Family Family[]
+}
+
+model Member {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  addicted  Boolean
+  insurance String?
+
+  Info                  PersonalInformation @relation(fields: [personalInformationId], references: [id])
+  personalInformationId String
+
+  Contact   Contact @relation(fields: [contactId], references: [id])
+  contactId String
+
+  Education   Education @relation(fields: [educationId], references: [id])
+  educationId String
+
+  Disability   Disablitiy @relation(fields: [disablitiyId], references: [id])
+  disablitiyId String
+
+  Health   Health @relation(fields: [healthId], references: [id])
+  healthId String
+
+  Job   Job    @relation(fields: [jobId], references: [id])
+  jobId String
+
+  subsidy Subsidy[]
+
+  FamilyMember Family? @relation("FamilyMemeber", fields: [familyId], references: [id])
+  familyId     Int?    @unique
+
+  Family Family[] @relation("FamilyHousehold")
+}
+
+model Subsidy {
+  id String @id @default(uuid())
+
+  type        SubsidyType
+  description String?
+  income      Int
+
+  Member   Member? @relation(fields: [memberId], references: [id])
+  memberId Int?
+}
+
+model Job {
+  id String @id @default(uuid())
+
+  title  String?
+  income Income?
+
+  Member Member[]
+}
+
+model Education {
+  id String @id @default(uuid())
+
+  status      EducationStatus?
+  lastDiploma Diploma?
+
+  Member Member[]
+}
+
+model Health {
+  id String @id @default(uuid())
+
+  status      HealthStatus
+  description String?
+
+  Member Member[]
+}
+
+model Disablitiy {
+  id String @id @default(uuid())
+
+  status      DisablitiyStatus
+  description String?
+
+  Member Member[]
+}
+
+model PersonalInformation {
+  id String @id @default(uuid())
+
+  gender        Gender?
+  dateOfBirth   DateTime?
+  fatherName    String?
+  issuedAt      String?
+  nationality   String?
+  region        Region?
+  maritalStatus MaritalStatus?
+
+  Member Member[]
+}
+
+model Contact {
+  id String @id @default(uuid())
+
+  homeAddress       String?
+  workAddress       String?
+  homePhoneNumber   String?
+  mobilePhoneNumber String?
+  workPhoneNumber   String?
+
+  Member Member[]
+}
+
+model Need {
+  id Int @id @default(autoincrement())
+}
+
+model Campaign {
+  id Int @id @default(autoincrement())
+}
+
+enum EducationStatus {
+  Iliterate
+  Student
+  Dropout
+  Graduated
+}
+
+enum Diploma {
+  Elementry
+  Cycle
+  Diploma
+  Bachelor
+  Master
+}
+
+enum Gender {
+  Male
+  Female
+}
+
+enum Region {
+  Shia
+  Sunni
+  Jewish
+  Christian
+  Zoroaster
+}
+
+enum MaritalStatus {
+  Married
+  Single
+  Divorced
+  Abandoned
+  DiedSpouse
+}
+
+enum Income {
+  Fixed
+  Periodic
+  None
+}
+
+enum DisablitiyStatus {
+  Healthy
+  Disablitiy
+}
+
+enum HealthStatus {
+  Healthy
+  Sick
+}
+
+enum SubsidyType {
+  General
+  Justice
+  Livelihood
+  Committee
+  Rehabilitation
+  Veteran
+  OtherCharity
+}
+
+enum Severity {
+  Critical
+  Poor
+  Case
+}

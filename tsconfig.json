@@ -1,8 +1,13 @@
 {
-  "exclude": "@fullstacksjs/tsconfig/react",
   "compilerOptions": {
-    "types": ["react/next", "react-dom/next"]
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "target": "ESNext",
+    "outDir": "./dist"
   },
-  "include": ["web"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [
+    { "path": "./tsconfig.node.json" },
+    { "path": "./tsconfig.web.json" }
+  ]
 }
