@@ -14,12 +14,12 @@ export abstract class BaseApp {
     this.router = Router();
 
     this.app.use(express.json());
-
-    const { handlers } = this.compiler.compile();
-    handlers.forEach((handler) => {
-      this.app[handler.method](
-        handler.path,
-        handler.handler.bind(handler.controller),
+    this.compiler.compile();
+    const apiRoutes = this.compiler.getApiRoutes();
+    apiRoutes.forEach((apiRoute) => {
+      this.app[apiRoute.method](
+        apiRoute.path,
+        apiRoute.handler.bind(apiRoute.controller),
       );
     });
   }

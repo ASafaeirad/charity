@@ -1,9 +1,7 @@
-import type { Type } from '.';
 import { MetadataKeys } from './MetadataKeys';
 
 export function Controller(path = '/'): ClassDecorator {
-  // @ts-ignore
-  return <T>(target: Type<T>) => {
+  return (target) => {
     Reflect.defineMetadata(MetadataKeys.Path, path, target);
   };
 }

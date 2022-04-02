@@ -1,12 +1,11 @@
-import type { BaseController } from '../BaseController';
-import type { Type } from '.';
+import type { Constructor } from '../Constructor';
 import { MetadataKeys } from './MetadataKeys';
 
 interface AppConfig {
   [MetadataKeys.Version]?: number;
   [MetadataKeys.Path]?: string;
-  [MetadataKeys.Controllers]?: BaseController[];
-  [MetadataKeys.Providers]?: Type<any>[];
+  [MetadataKeys.Controllers]?: Constructor<any>[];
+  [MetadataKeys.Providers]?: Constructor<any>[];
 }
 
 export function App({

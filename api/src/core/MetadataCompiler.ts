@@ -1,15 +1,29 @@
+import type { Handler } from 'express';
 import { join as joinPath } from 'path';
 
 import type { BaseApp } from './App';
-import type { RequestMethod, Type } from './decorators';
+import type { Constructor } from './Constructor';
+import type { RequestMethod } from './decorators';
 import { MetadataKeys } from './decorators';
 import { Injector } from './Injector';
+
+interface ApiRoute {
+  method: RequestMethod;
+  path: string;
+  handler: Handler;
+  controller: Constructor<any>;
+}
 
 export class MetadataCompiler {
   private rootPath: string;
   private version: number;
-  private controllers: Type<any>[];
-  private providers: Type<any>[];
+  private controllers: Constructor<any>[];
+  private providers: Constructor<any>[];
+  private _apiRoutes: ApiRoute[] = [];
+
+  public getApiRoutes() {
+    return this._apiRoutes;
+  }
 
   constructor(private app: BaseApp) {
     const ctor = app.constructor;
@@ -27,9 +41,9 @@ export class MetadataCompiler {
       Injector.resolve(item);
     });
 
-    const handlers = this.controllers.flatMap((ControllerClass) => {
+    this._apiRoutes = this.controllers.flatMap<ApiRoute>((ControllerClass) => {
       const baseRoute = Reflect.getMetadata(MetadataKeys.Path, ControllerClass);
-      const controller = Injector.resolve(ControllerClass);
+      const controller: Constructor<any> = Injector.resolve(ControllerClass);
       const members = Object.getOwnPropertyNames(
         Object.getPrototypeOf(controller),
       );
@@ -39,7 +53,7 @@ export class MetadataCompiler {
           Reflect.getMetadata(MetadataKeys.IsHandler, controller[key]),
         )
         .map((key) => {
-          const handler = controller[key];
+          const handler: Handler = controller[key];
           const handlerRoute = Reflect.getMetadata(MetadataKeys.Path, handler);
           const method: RequestMethod = Reflect.getMetadata(
             MetadataKeys.Method,
@@ -56,7 +70,5 @@ export class MetadataCompiler {
           return { method, path, handler, controller };
         });
     });
-
-    return { handlers };
   }
 }

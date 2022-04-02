@@ -1,10 +1,8 @@
 import { App, BaseApp } from './core';
 import { FamilyController } from './modules/Family';
-import { PrismaService } from './modules/Family/PrismaService';
+import { PrismaService } from './PrismaService';
 
 @App({
-  version: 1,
-  path: '/api',
   controllers: [FamilyController],
   providers: [PrismaService],
 })

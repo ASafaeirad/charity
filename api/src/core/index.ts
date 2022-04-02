@@ -1,3 +1,3 @@
 export * from './App';
-export * from './BaseController';
+export * from './Constructor';
 export * from './decorators';
