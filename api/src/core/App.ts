@@ -1,4 +1,4 @@
-import type { Express } from 'express';
+import type { Express, NextFunction, Request, Response } from 'express';
 import express, { Router } from 'express';
 
 import type { Config } from '../environment';
@@ -21,6 +21,15 @@ export abstract class BaseApp {
         apiRoute.path,
         apiRoute.handler.bind(apiRoute.controller),
       );
+    });
+    this.app.use(function errorHandler(
+      err: Error,
+      _,
+      res: Response,
+      _next: NextFunction,
+    ) {
+      res.status(500);
+      res.json({ message: err.message });
     });
   }
 
