@@ -5,16 +5,24 @@
   "scripts": {
     "dev": "ts-node-dev api/src/main.ts -p tsconfig.node.json",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "vite",
+    "spell": "cspell ./web/**/*.{ts,tsx} ./api/**/*.ts"
   },
   "private": true,
   "dependencies": {
+    "@mantine/core": "4.1.3",
+    "@mantine/hooks": "4.1.3",
     "@prisma/client": "3.11.0",
     "dotenv": "16.0.0",
     "express": "5.0.0-beta.1",
     "react": "18.0.0",
     "react-dom": "18.0.0",
-    "reflect-metadata": "0.1.13"
+    "react-router-dom": "6.3.0",
+    "reflect-metadata": "0.1.13",
+    "stylis": "4.1.0",
+    "stylis-plugin-rtl": "2.1.1",
+    "tabler-icons-react": "1.44.0"
   },
   "devDependencies": {
     "@fullstacksjs/eslint-config": "8.3.0",
@@ -25,6 +33,7 @@
     "@types/react": "17.0.41",
     "@types/react-dom": "17.0.14",
     "@vitejs/plugin-react": "1.2.0",
+    "cspell": "5.19.7",
     "eslint": "8.11.0",
     "prettier": "2.6.0",
     "prisma": "3.11.0",

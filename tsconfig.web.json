@@ -1,8 +1,8 @@
 {
   "exclude": ["@fullstacksjs/tsconfig/react"],
   "compilerOptions": {
+    "jsx": "react-jsx",
     "composite": true,
-    "types": ["react/next", "react-dom/next"]
   },
   "include": ["web"]
 }
