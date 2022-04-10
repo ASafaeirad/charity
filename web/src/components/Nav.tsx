@@ -1,25 +1,18 @@
-import { createStyles, Navbar } from '@mantine/core';
+import { Accordion, createStyles, Navbar, ThemeIcon } from '@mantine/core';
 import type { DefaultResources } from 'react-i18next';
 import { useTranslation } from 'react-i18next';
+import { matchPath, useLocation, useMatch } from 'react-router-dom';
 import type { Icon } from 'tabler-icons-react';
-import { Users } from 'tabler-icons-react';
+import { Bookmarks, Users } from 'tabler-icons-react';
 
 import type { Path } from './TypedLink';
 import { TypedNavLink } from './TypedLink';
 
-const useStyles = createStyles((theme, _params, getRef) => {
-  const icon = getRef('icon');
+const useStyles = createStyles((theme) => {
   return {
-    footer: {
-      paddingTop: theme.spacing.md,
-      marginTop: theme.spacing.md,
-      borderTop: `1px solid ${theme.colors.gray[2]}`,
-    },
-
     link: {
       ...theme.fn.focusStyles(),
       display: 'flex',
-      alignItems: 'center',
       textDecoration: 'none',
       fontSize: theme.fontSizes.sm,
       color: theme.colors.gray[7],
@@ -30,60 +23,91 @@ const useStyles = createStyles((theme, _params, getRef) => {
       '&:hover': {
         backgroundColor: theme.colors.gray[0],
         color: theme.black,
-
-        [`& .${icon}`]: {
-          color: theme.black,
-        },
       },
-    },
-
-    linkIcon: {
-      ref: icon,
-      color: theme.colors.gray[6],
-      marginRight: theme.spacing.sm,
     },
 
     linkActive: {
       '&, &:hover': {
         backgroundColor: theme.colors[theme.primaryColor][0],
         color: theme.colors[theme.primaryColor][7],
-        [`& .${icon}`]: {
-          color: theme.colors[theme.primaryColor][7],
-        },
       },
     },
   };
 });
 
 interface NavItem {
-  link: Path;
   label: keyof DefaultResources['glossary'];
   icon: Icon;
+  links: {
+    to: Path;
+    label: keyof DefaultResources['glossary'];
+  }[];
 }
 
 const items: NavItem[] = [
-  { link: '/families', label: 'families', icon: Users },
+  {
+    label: 'families',
+    icon: Users,
+    links: [
+      { to: '/family/add', label: 'add_family' },
+      { to: '/family/list', label: 'family_list' },
+    ],
+  },
+  {
+    label: 'campaigns',
+    icon: Bookmarks,
+    links: [
+      { to: '/campaign/add', label: 'add_campaign' },
+      { to: '/campaign/list', label: 'campaign_list' },
+    ],
+  },
 ];
 
 export const Nav = () => {
   const { classes, cx } = useStyles();
   const { t } = useTranslation();
+  const location = useLocation();
+  const initialItem = items.findIndex((item) =>
+    item.links.find((to) => matchPath(to.to, location.pathname)),
+  );
 
   return (
     <Navbar width={{ sm: 300 }} p="md">
       <Navbar.Section grow>
-        {items.map(({ link, label, icon: Icon }) => (
-          <TypedNavLink
-            className={({ isActive }) =>
-              cx(classes.link, { [classes.linkActive]: isActive })
-            }
-            to={link}
-            key={label}
-          >
-            <Icon className={classes.linkIcon} />
-            <span>{t(label)}</span>
-          </TypedNavLink>
-        ))}
+        <Accordion
+          disableIconRotation
+          offsetIcon={false}
+          initialItem={initialItem}
+          styles={(theme) => ({
+            control: { padding: `${theme.spacing.xs}px ${theme.spacing.sm}px` },
+            contentInner: { paddingInlineStart: `${theme.spacing.xl + 16}px` },
+            item: { borderBottom: 'none' },
+          })}
+        >
+          {items.map(({ links, label, icon: Icon }) => (
+            <Accordion.Item
+              key={label}
+              label={t(label)}
+              icon={
+                <ThemeIcon color="primary" variant="light">
+                  <Icon size={16} />
+                </ThemeIcon>
+              }
+            >
+              {links.map(({ to, label: link }) => (
+                <TypedNavLink
+                  key={link}
+                  className={({ isActive }) =>
+                    cx(classes.link, { [classes.linkActive]: isActive })
+                  }
+                  to={to}
+                >
+                  {t(link)}
+                </TypedNavLink>
+              ))}
+            </Accordion.Item>
+          ))}
+        </Accordion>
       </Navbar.Section>
     </Navbar>
   );
