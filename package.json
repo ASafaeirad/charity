@@ -7,6 +7,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "start": "vite",
+    "test": "vitest",
     "spell": "cspell ./web/**/*.{ts,tsx} ./api/**/*.ts"
   },
   "private": true,
@@ -42,7 +43,8 @@
     "ts-node": "10.7.0",
     "ts-node-dev": "1.1.8",
     "typescript": "4.6.2",
-    "vite": "2.8.6"
+    "vite": "2.8.6",
+    "vitest": "0.9.3"
   },
   "volta": {
     "node": "17.7.2",

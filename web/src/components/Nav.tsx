@@ -1,14 +1,11 @@
 import { createStyles, Navbar } from '@mantine/core';
-import type { TFunction, TFunctionKeys } from 'i18next';
 import type { DefaultResources } from 'react-i18next';
 import { useTranslation } from 'react-i18next';
-import { NavLink } from 'react-router-dom';
 import type { Icon } from 'tabler-icons-react';
-import { Logout, Users } from 'tabler-icons-react';
+import { Users } from 'tabler-icons-react';
 
 import type { Path } from './TypedLink';
-import { TypedLink, TypedNavLink } from './TypedLink';
-import type { PathParams } from './TypedLink/PathParams';
+import { TypedNavLink } from './TypedLink';
 
 const useStyles = createStyles((theme, _params, getRef) => {
   const icon = getRef('icon');

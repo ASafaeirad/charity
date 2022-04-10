@@ -3,7 +3,8 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "composite": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "downlevelIteration": true
   },
-  "include": ["web", "web/**/*.json", "vite.config.ts",]
+  "include": ["web", "web/**/*.json", "vite.config.ts"]
 }

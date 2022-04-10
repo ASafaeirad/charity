@@ -1,21 +1,23 @@
-/* eslint-disable fp/no-loops, fp/no-let */
-import { isNull } from '@fullstacksjs/toolbox';
+function validateArgs(keys: string[], path: string) {
+  keys.forEach((param) => {
+    if (!path.includes(param)) throw Error('Wrong param');
+    const parts = path.split('/');
+    const uniqueParts = [...new Set(parts)];
+    if (uniqueParts.length < parts.length) throw Error('Duplicated params');
+  });
+}
 
-import type { PathParams } from './PathParams';
-import type { Path } from './Paths';
-
-export const buildUrl = <P extends Path>(
-  path: P,
-  params?: PathParams<P>,
+export const buildUrl = (
+  path: string,
+  params: Record<string, string> = {},
 ): string => {
-  if (isNull(params)) return path;
+  const keys = Object.keys(params);
+  const parts = path.split('/');
 
-  const paramObj: { [i: string]: string } = params;
+  validateArgs(keys, path);
 
-  let ret: string = path;
-  for (const key of Object.keys(paramObj)) {
-    ret = ret.replace(`:${key}`, paramObj[key]);
-  }
-
-  return ret;
+  return parts.reduce((acc, part) => {
+    const param = part.startsWith(':') ? params[part.slice(1)] : part;
+    return `${acc}/${param ?? part}`;
+  });
 };
