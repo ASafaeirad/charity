@@ -2,7 +2,8 @@
   "root": true,
   "extends": ["@fullstacksjs"],
   "rules": {
-    "@typescript-eslint/ban-types": "off"
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/no-invalid-void-type": "off"
   },
   "parserOptions": {
     "emitDecoratorMetadata": true
