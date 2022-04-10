@@ -8,5 +8,5 @@
     "moduleResolution": "node",
     "composite": true
   },
-  "include": ["vite.config.ts", "api"]
+  "include": ["api"]
 }

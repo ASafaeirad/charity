@@ -1,6 +1,14 @@
 import { createStyles, Navbar } from '@mantine/core';
+import type { TFunction, TFunctionKeys } from 'i18next';
+import type { DefaultResources } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
+import type { Icon } from 'tabler-icons-react';
 import { Logout, Users } from 'tabler-icons-react';
+
+import type { Path } from './TypedLink';
+import { TypedLink, TypedNavLink } from './TypedLink';
+import type { PathParams } from './TypedLink/PathParams';
 
 const useStyles = createStyles((theme, _params, getRef) => {
   const icon = getRef('icon');
@@ -50,16 +58,25 @@ const useStyles = createStyles((theme, _params, getRef) => {
   };
 });
 
-const data = [{ link: 'families', label: 'خانواده ها', icon: Users }];
+interface NavItem {
+  link: Path;
+  label: keyof DefaultResources['glossary'];
+  icon: Icon;
+}
+
+const items: NavItem[] = [
+  { link: '/families', label: 'families', icon: Users },
+];
 
 export const Nav = () => {
   const { classes, cx } = useStyles();
+  const { t } = useTranslation();
 
   return (
     <Navbar width={{ sm: 300 }} p="md">
       <Navbar.Section grow>
-        {data.map(({ link, label, icon: Icon }) => (
-          <NavLink
+        {items.map(({ link, label, icon: Icon }) => (
+          <TypedNavLink
             className={({ isActive }) =>
               cx(classes.link, { [classes.linkActive]: isActive })
             }
@@ -67,16 +84,9 @@ export const Nav = () => {
             key={label}
           >
             <Icon className={classes.linkIcon} />
-            <span>{label}</span>
-          </NavLink>
+            <span>{t(label)}</span>
+          </TypedNavLink>
         ))}
-      </Navbar.Section>
-
-      <Navbar.Section className={classes.footer}>
-        <NavLink to="/logout" className={classes.link}>
-          <Logout className={classes.linkIcon} />
-          <span>Logout</span>
-        </NavLink>
       </Navbar.Section>
     </Navbar>
   );

@@ -5,6 +5,9 @@ import stylisRTLPlugin from 'stylis-plugin-rtl';
 
 import App from './App';
 import { GlobalStyles } from './components/GlobalStyles';
+import { initI18n } from './i18n';
+
+initI18n();
 
 const container = document.getElementById('⚛')!;
 const root = createRoot(container);

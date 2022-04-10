@@ -16,10 +16,12 @@ specifiers:
   dotenv: 16.0.0
   eslint: 8.11.0
   express: 5.0.0-beta.1
+  i18next: 21.6.15
   prettier: 2.6.0
   prisma: 3.11.0
   react: 18.0.0
   react-dom: 18.0.0
+  react-i18next: 11.16.3
   react-router-dom: 6.3.0
   reflect-metadata: 0.1.13
   stylis: 4.1.0
@@ -36,8 +38,10 @@ dependencies:
   '@prisma/client': 3.11.0_prisma@3.11.0
   dotenv: 16.0.0
   express: 5.0.0-beta.1
+  i18next: 21.6.15
   react: 18.0.0
   react-dom: 18.0.0_react@18.0.0
+  react-i18next: 11.16.3_7a73451d41bf608e278210799a30f59a
   react-router-dom: 6.3.0_react-dom@18.0.0+react@18.0.0
   reflect-metadata: 0.1.13
   stylis: 4.1.0
@@ -3206,6 +3210,16 @@ packages:
     resolution: {integrity: sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==}
     dev: true
 
+  /html-escaper/2.0.2:
+    resolution: {integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==}
+    dev: false
+
+  /html-parse-stringify/3.0.1:
+    resolution: {integrity: sha512-KknJ50kTInJ7qIScF3jeaFRpMpE8/lfiTdzf/twXyPBLAGrLRTmkz3AdTnKeh40X8k9L2fdYwEp/42WGXIRGcg==}
+    dependencies:
+      void-elements: 3.1.0
+    dev: false
+
   /http-errors/1.8.1:
     resolution: {integrity: sha512-Kpk9Sm7NmI+RHhnj6OIWDI1d6fIoFAtFt9RLaTMRlg/8w49juAStsrBgp0Dp4OdxdVbRIeKhtCUvoi/RuAhO4g==}
     engines: {node: '>= 0.6'}
@@ -3215,6 +3229,12 @@ packages:
       setprototypeof: 1.2.0
       statuses: 1.5.0
       toidentifier: 1.0.1
+    dev: false
+
+  /i18next/21.6.15:
+    resolution: {integrity: sha512-uMFyw5HGK9KSJ7ok/WUJfeNQj53VOR4NoITtErffWen2v2SjJfpCls7tKTLF1nTCdKRePY4lCoZMLKhRSj/1GA==}
+    dependencies:
+      '@babel/runtime': 7.17.8
     dev: false
 
   /iconv-lite/0.4.24:
@@ -3985,6 +4005,27 @@ packages:
 
   /react-fast-compare/3.2.0:
     resolution: {integrity: sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==}
+    dev: false
+
+  /react-i18next/11.16.3_7a73451d41bf608e278210799a30f59a:
+    resolution: {integrity: sha512-Z1DNGeVadbHJYM+hnVMA5bGkWRf184lK8DPXWFBm9hlvwGspAkL6Vu+qX5XoQTxX6JZ7twpiqEF00S/al5Zxdw==}
+    peerDependencies:
+      i18next: '>= 19.0.0'
+      react: '>= 16.8.0'
+      react-dom: '*'
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.17.8
+      html-escaper: 2.0.2
+      html-parse-stringify: 3.0.1
+      i18next: 21.6.15
+      react: 18.0.0
+      react-dom: 18.0.0_react@18.0.0
     dev: false
 
   /react-is/16.13.1:
@@ -4778,6 +4819,11 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /void-elements/3.1.0:
+    resolution: {integrity: sha1-YU9/v42AHwu18GYfWy9XhXUOTwk=}
+    engines: {node: '>=0.10.0'}
+    dev: false
 
   /vscode-languageserver-textdocument/1.0.4:
     resolution: {integrity: sha512-/xhqXP/2A2RSs+J8JNXpiiNVvvNM0oTosNVmQnunlKvq9o4mupHOBAnnzH0lwIPKazXKvAKsVp1kr+H/K4lgoQ==}
