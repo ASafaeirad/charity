@@ -1,0 +1,13 @@
+{
+  "rules": {
+    "@typescript-eslint/no-extraneous-class": "off"
+  },
+  "overrides": [
+    {
+      "files": ["*.spec.ts"],
+      "rules": {
+        "fp/no-let": "off"
+      }
+    }
+  ]
+}

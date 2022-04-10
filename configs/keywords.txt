@@ -10,3 +10,5 @@ fullstacksjs
 Shabnam
 vitest
 reduxjs
+nestjs
+fastify

@@ -5,7 +5,6 @@ datasource codeit {
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../prisma/client"
 }
 
 model Admin {
@@ -55,8 +54,8 @@ model Member {
   Education   Education @relation(fields: [educationId], references: [id])
   educationId String
 
-  Disability   Disablitiy @relation(fields: [disablitiyId], references: [id])
-  disablitiyId String
+  Disability   Disablitiy? @relation(fields: [disablitiyId], references: [id])
+  disablitiyId String?
 
   Health   Health @relation(fields: [healthId], references: [id])
   healthId String
@@ -127,7 +126,7 @@ model PersonalInformation {
   fatherName    String?
   issuedAt      String?
   nationality   String?
-  region        Region?
+  religion      Religion?
   maritalStatus MaritalStatus?
 
   Member Member[]
@@ -173,7 +172,7 @@ enum Gender {
   Female
 }
 
-enum Region {
+enum Religion {
   Shia
   Sunni
   Jewish

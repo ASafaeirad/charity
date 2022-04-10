@@ -1,8 +1,16 @@
-import 'reflect-metadata';
+import { NestFactory } from '@nestjs/core';
+import type { NestFastifyApplication } from '@nestjs/platform-fastify';
+import { FastifyAdapter } from '@nestjs/platform-fastify';
 
-import { CharityApp } from './CharityApp';
-import { getConfig } from './environment';
+import { AppModule } from './app.module';
 
-new CharityApp(getConfig()).listen().then(({ port }) => {
-  console.log(`🚀 Server listening on port: ${port}`);
-});
+async function bootstrap() {
+  const app = await NestFactory.create<NestFastifyApplication>(
+    AppModule,
+    new FastifyAdapter(),
+  );
+  app.enableCors();
+  await app.listen(4000);
+}
+
+bootstrap();

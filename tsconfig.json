@@ -7,7 +7,7 @@
     "outDir": "./dist"
   },
   "references": [
-    { "path": "./tsconfig.node.json" },
+    { "path": "./tsconfig.api.json" },
     { "path": "./tsconfig.web.json" }
   ]
 }
