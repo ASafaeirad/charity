@@ -13,3 +13,5 @@ reduxjs
 nestjs
 fastify
 pnpm
+autoincrement
+datasource

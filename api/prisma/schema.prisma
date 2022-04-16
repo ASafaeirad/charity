@@ -1,10 +1,24 @@
-datasource codeit {
+datasource charity {
   provider = "postgresql"
   url      = env("DATABASE_URI")
 }
 
 generator client {
   provider = "prisma-client-js"
+}
+
+generator nestjs {
+  provider                        = "prisma-generator-nestjs-dto"
+  output                          = "../src/generated/dto"
+  outputToNestJsResourceStructure = "true"
+  exportRelationModifierClasses   = "true"
+  reExport                        = "true"
+  createDtoPrefix                 = "Create"
+  updateDtoPrefix                 = "Update"
+  dtoSuffix                       = "Dto"
+  entityPrefix                    = ""
+  entitySuffix                    = ""
+  fileNamingStyle                 = "camel"
 }
 
 model Admin {
@@ -27,7 +41,7 @@ model Family {
 
   severity Severity
 
-  members Member[] @relation("FamilyMemeber")
+  members Member[] @relation("FamilyMember")
 }
 
 model Referer {
@@ -54,8 +68,8 @@ model Member {
   Education   Education @relation(fields: [educationId], references: [id])
   educationId String
 
-  Disability   Disablitiy? @relation(fields: [disablitiyId], references: [id])
-  disablitiyId String?
+  Disability   Disability? @relation(fields: [disabilityId], references: [id])
+  disabilityId String?
 
   Health   Health @relation(fields: [healthId], references: [id])
   healthId String
@@ -65,7 +79,7 @@ model Member {
 
   subsidy Subsidy[]
 
-  FamilyMember Family? @relation("FamilyMemeber", fields: [familyId], references: [id])
+  FamilyMember Family? @relation("FamilyMember", fields: [familyId], references: [id])
   familyId     Int?    @unique
 
   Family Family[] @relation("FamilyHousehold")
@@ -109,10 +123,10 @@ model Health {
   Member Member[]
 }
 
-model Disablitiy {
+model Disability {
   id String @id @default(uuid())
 
-  status      DisablitiyStatus
+  status      DisabilityStatus
   description String?
 
   Member Member[]
@@ -153,14 +167,14 @@ model Campaign {
 }
 
 enum EducationStatus {
-  Iliterate
+  Illiterate
   Student
   Dropout
   Graduated
 }
 
 enum Diploma {
-  Elementry
+  Elementary
   Cycle
   Diploma
   Bachelor
@@ -194,9 +208,9 @@ enum Income {
   None
 }
 
-enum DisablitiyStatus {
+enum DisabilityStatus {
   Healthy
-  Disablitiy
+  Disability
 }
 
 enum HealthStatus {
