@@ -9,8 +9,6 @@ export class FamilyController {
 
   @Get('/')
   getAll(): Promise<Family[]> {
-    console.log('Here');
-
     return this.familyService.families();
   }
 }
