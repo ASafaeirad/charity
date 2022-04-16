@@ -12,3 +12,4 @@ vitest
 reduxjs
 nestjs
 fastify
+pnpm

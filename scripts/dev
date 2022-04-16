@@ -1,0 +1,2 @@
+docker-compose up -d
+pnpm exec run-p dev:*
