@@ -6,5 +6,6 @@ export class Job {
   id: string;
   title: string | null;
   income: Income | null;
-  Member?: Member[];
+  Member?: Member | null;
+  memberId: number | null;
 }

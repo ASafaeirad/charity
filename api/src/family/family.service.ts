@@ -11,12 +11,8 @@ export class FamilyService {
       include: {
         household: {
           include: {
-            Education: true,
-            Disability: true,
-            Health: true,
-            Info: true,
             Contact: true,
-            Job: true,
+            Jobs: true,
           },
         },
       },

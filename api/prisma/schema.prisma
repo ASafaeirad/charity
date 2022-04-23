@@ -32,16 +32,17 @@ model Family {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  name      String
 
-  household   Member? @relation("FamilyHousehold", fields: [householdId], references: [id])
+  household   Member? @relation("Family-Household", fields: [householdId], references: [id])
   householdId Int?    @unique
 
-  referral  Referer? @relation(fields: [refererId], references: [id])
+  referer   Referer? @relation(fields: [refererId], references: [id])
   refererId Int?
 
   severity Severity
 
-  members Member[] @relation("FamilyMember")
+  members Member[] @relation("Family-Member")
 }
 
 model Referer {
@@ -56,33 +57,44 @@ model Member {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  addicted  Boolean
-  insurance String?
+  addicted      Boolean?
+  dateOfBirth   DateTime?
+  fatherName    String?
+  gender        Gender?
+  insurance     String?
+  issuedAt      DateTime?
+  maritalStatus MaritalStatus?
+  nationality   String?
+  religion      Religion?
 
-  Info                  PersonalInformation @relation(fields: [personalInformationId], references: [id])
-  personalInformationId String
+  educationStatus EducationStatus?
+  lastDiploma     Diploma?
+
+  disabilityStatus      DisabilityStatus?
+  disabilityDescription String?
+
+  healthStatus      HealthStatus
+  healthDescription String?
 
   Contact   Contact @relation(fields: [contactId], references: [id])
   contactId String
 
-  Education   Education @relation(fields: [educationId], references: [id])
-  educationId String
-
-  Disability   Disability? @relation(fields: [disabilityId], references: [id])
-  disabilityId String?
-
-  Health   Health @relation(fields: [healthId], references: [id])
-  healthId String
-
-  Job   Job    @relation(fields: [jobId], references: [id])
-  jobId String
-
+  Jobs    Job[]
   subsidy Subsidy[]
 
-  FamilyMember Family? @relation("FamilyMember", fields: [familyId], references: [id])
-  familyId     Int?    @unique
+  MemberOfFamilyId Family? @relation("Family-Member", fields: [memberOfFamilyId], references: [id])
+  memberOfFamilyId Int?    @unique
 
-  Family Family[] @relation("FamilyHousehold")
+  HouseholdOfFamily Family[] @relation("Family-Household")
+}
+
+model Job {
+  id String @id @default(uuid())
+
+  title    String?
+  income   Income?
+  Member   Member? @relation(fields: [memberId], references: [id])
+  memberId Int?
 }
 
 model Subsidy {
@@ -94,56 +106,6 @@ model Subsidy {
 
   Member   Member? @relation(fields: [memberId], references: [id])
   memberId Int?
-}
-
-model Job {
-  id String @id @default(uuid())
-
-  title  String?
-  income Income?
-
-  Member Member[]
-}
-
-model Education {
-  id String @id @default(uuid())
-
-  status      EducationStatus?
-  lastDiploma Diploma?
-
-  Member Member[]
-}
-
-model Health {
-  id String @id @default(uuid())
-
-  status      HealthStatus
-  description String?
-
-  Member Member[]
-}
-
-model Disability {
-  id String @id @default(uuid())
-
-  status      DisabilityStatus
-  description String?
-
-  Member Member[]
-}
-
-model PersonalInformation {
-  id String @id @default(uuid())
-
-  gender        Gender?
-  dateOfBirth   DateTime?
-  fatherName    String?
-  issuedAt      String?
-  nationality   String?
-  religion      Religion?
-  maritalStatus MaritalStatus?
-
-  Member Member[]
 }
 
 model Contact {

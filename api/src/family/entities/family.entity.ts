@@ -7,9 +7,10 @@ export class Family {
   id: number;
   createdAt: Date;
   updatedAt: Date;
+  name: string;
   household?: Member | null;
   householdId: number | null;
-  referral?: Referer | null;
+  referer?: Referer | null;
   refererId: number | null;
   severity: Severity;
   members?: Member[];

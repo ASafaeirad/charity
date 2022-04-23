@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { ApiOkResponse } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { Family } from './entities/family.entity';
 import { FamilyService } from './family.service';
@@ -9,6 +9,7 @@ export class FamilyController {
   constructor(private familyService: FamilyService) {}
 
   @Get('/')
+  @ApiTags('family')
   @ApiOkResponse({ type: Family })
   getAll(): Promise<Family[]> {
     return this.familyService.families();
