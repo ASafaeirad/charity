@@ -4,7 +4,8 @@
     "jsx": "react-jsx",
     "composite": true,
     "resolveJsonModule": true,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "strictNullChecks": true
   },
   "include": ["web", "web/**/*.json", "vite.config.ts"]
 }

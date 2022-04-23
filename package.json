@@ -48,8 +48,10 @@
     "cspell": "5.19.7",
     "eslint": "8.11.0",
     "npm-run-all": "4.1.5",
+    "orval": "6.7.1",
     "prettier": "2.6.0",
     "prisma": "3.11.0",
+    "ts-node": "10.7.0",
     "typescript": "4.6.2",
     "vite": "2.8.6",
     "vitest": "0.9.3"
@@ -60,6 +62,6 @@
   },
   "prisma": {
     "schema": "./api/prisma/schema.prisma",
-    "seed": "ts-node --project tsconfig.base.json -r tsconfig-paths/register ./api/prisma/seed.ts"
+    "seed": "ts-node --project tsconfig.api.json ./api/prisma/seed.ts"
   }
 }
