@@ -4,8 +4,8 @@ specifiers:
   '@fullstacksjs/eslint-config': 8.3.0
   '@fullstacksjs/toolbox': 2.14.0
   '@fullstacksjs/tsconfig': 0.6.0
+  '@hookform/resolvers': 2.8.10
   '@mantine/core': 4.2.5
-  '@mantine/form': 4.2.5
   '@mantine/hooks': 4.2.5
   '@mantine/notifications': 4.2.5
   '@nestjs/cli': 8.2.5
@@ -34,6 +34,7 @@ specifiers:
   prisma: 3.11.0
   react: 18.0.0
   react-dom: 18.0.0
+  react-hook-form: 7.31.2
   react-i18next: 11.16.9
   react-redux: 7.2.8
   react-router-dom: 6.3.0
@@ -50,8 +51,8 @@ specifiers:
   zod: 3.14.4
 
 dependencies:
+  '@hookform/resolvers': 2.8.10_react-hook-form@7.31.2
   '@mantine/core': 4.2.5_bq6d62mhcoy65djxqhs2rqlxky
-  '@mantine/form': 4.2.5_react@18.0.0
   '@mantine/hooks': 4.2.5_react@18.0.0
   '@mantine/notifications': 4.2.5_rqnbjlutiwai5a37m6tmbwcp64
   '@nestjs/common': 8.4.5_47vcjb2de6lyibr6g4enoa5lyu
@@ -64,6 +65,7 @@ dependencies:
   i18next: 21.6.15
   react: 18.0.0
   react-dom: 18.0.0_react@18.0.0
+  react-hook-form: 7.31.2_react@18.0.0
   react-i18next: 11.16.9_pjzukhkbx5qi4j4ccb4zumhvti
   react-redux: 7.2.8_zpnidt7m3osuk7shl3s4oenomq
   react-router-dom: 6.3.0_zpnidt7m3osuk7shl3s4oenomq
@@ -1162,6 +1164,14 @@ packages:
       value-or-promise: 1.0.11
     dev: true
 
+  /@hookform/resolvers/2.8.10_react-hook-form@7.31.2:
+    resolution: {integrity: sha512-DDFtNlugsbwAhCJHYp3NcN5LvJrwSsCLPi41Wo5O8UAIbUFnBfY/jW+zKnlX57BZ4jE0j/g6R9rB3JlO89ad0g==}
+    peerDependencies:
+      react-hook-form: ^7.0.0
+    dependencies:
+      react-hook-form: 7.31.2_react@18.0.0
+    dev: false
+
   /@humanwhocodes/config-array/0.9.5:
     resolution: {integrity: sha512-ObyMyWxZiCu/yTisA7uzx81s40xR2fD5Cg/2Kq7G02ajkNubJf6BopgDTmDyc3U7sXpNKM8cYOw7s7Tyr+DnCw==}
     engines: {node: '>=10.10.0'}
@@ -1261,14 +1271,6 @@ packages:
     transitivePeerDependencies:
       - '@babel/core'
       - '@types/react'
-    dev: false
-
-  /@mantine/form/4.2.5_react@18.0.0:
-    resolution: {integrity: sha512-BqYy/orl7ha3pVnMhWVGDK6v5O9IqBQK76Eb15FRc3KvlcX+PaaQwvwHQW1mN2Tk362WPqe3LJwAATOgy3xAog==}
-    peerDependencies:
-      react: '>=16.8.0'
-    dependencies:
-      react: 18.0.0
     dev: false
 
   /@mantine/hooks/4.2.5_react@18.0.0:
@@ -7238,6 +7240,15 @@ packages:
 
   /react-fast-compare/3.2.0:
     resolution: {integrity: sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==}
+    dev: false
+
+  /react-hook-form/7.31.2_react@18.0.0:
+    resolution: {integrity: sha512-oPudn3YuyzWg//IsT9z2cMEjWocAgHWX/bmueDT8cmsYQnGY5h7/njjvMDfLVv3mbdhYBjslTRnII2MIT7eNCA==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.0.0
     dev: false
 
   /react-i18next/11.16.9_pjzukhkbx5qi4j4ccb4zumhvti:

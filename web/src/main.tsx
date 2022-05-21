@@ -7,7 +7,7 @@ import stylisRTLPlugin from 'stylis-plugin-rtl';
 
 import App from './App';
 import { GlobalStyles } from './components/GlobalStyles';
-import { initI18n } from './i18n';
+import { initI18n } from './i18n/i18n';
 import { store } from './store';
 
 initI18n();
