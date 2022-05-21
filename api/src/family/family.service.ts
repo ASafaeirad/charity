@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { PrismaService } from '../prisma/prisma.service';
+import type { CreateFamilyDto } from './dto/create-family.dto';
 
 @Injectable()
 export class FamilyService {
@@ -9,13 +10,14 @@ export class FamilyService {
   public families() {
     return this.prisma.family.findMany({
       include: {
-        household: {
-          include: {
-            Contact: true,
-            Jobs: true,
-          },
-        },
+        household: { include: { Contact: true, Jobs: true } },
+        members: true,
+        referer: true,
       },
     });
+  }
+
+  public create(family: CreateFamilyDto) {
+    return this.prisma.family.create({ data: family });
   }
 }

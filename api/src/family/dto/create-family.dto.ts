@@ -7,4 +7,7 @@ export class CreateFamilyDto {
 
   @ApiProperty({ enum: Severity })
   severity: Severity;
+
+  @ApiProperty()
+  refererId?: number;
 }
