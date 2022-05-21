@@ -1,4 +1,5 @@
 import { MantineProvider } from '@mantine/core';
+import { NotificationsProvider } from '@mantine/notifications';
 import { createRoot } from 'react-dom/client';
 import { Provider as StoreProvider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -26,8 +27,10 @@ root.render(
           headings: { fontFamily: 'Shabnam, Open Sans, sans serif' },
         }}
       >
-        <GlobalStyles />
-        <App />
+        <NotificationsProvider>
+          <GlobalStyles />
+          <App />
+        </NotificationsProvider>
       </MantineProvider>
     </StoreProvider>
   </BrowserRouter>,

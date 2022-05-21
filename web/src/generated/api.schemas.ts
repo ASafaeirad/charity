@@ -18,6 +18,7 @@ export const CreateFamilyDtoSeverity = {
 export interface CreateFamilyDto {
   name: string;
   severity: CreateFamilyDtoSeverity;
+  refererId?: number;
 }
 
 export interface MemberHealthStatus {

@@ -1,10 +1,9 @@
 import { Box } from '@mantine/core';
 
-import { useFamiliesQuery } from '../api/familyApiSlice';
+import { useGetFamiliesQuery } from '../api/familyApiSlice';
 
-export const FamilyListPage: React.VFC = () => {
-  const { data: families } = useFamiliesQuery();
-  console.log(families);
+export const FamilyListPage: React.FC = () => {
+  const { data: families } = useGetFamiliesQuery();
 
   return (
     <Box>

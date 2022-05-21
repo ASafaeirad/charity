@@ -1,9 +1,26 @@
 {
-  "logo": "پناه نور مانا",
-  "families": "خانواده‌ها",
-  "add_family": "اضافه کردن خانواده",
-  "family_list": "لیست خانواده‌ها",
-  "campaigns": "کمپین‌ها",
   "add_campaign": "اضافه کردن کمپین",
-  "campaign_list": "لیست کمپین‌ها"
+  "add_family": "اضافه کردن خانواده",
+  "campaign_list": "لیست کمپین‌ها",
+  "campaigns": "کمپین‌ها",
+  "families": "خانواده‌ها",
+  "family_list": "لیست خانواده‌ها",
+  "logo": "پناه نور مانا",
+  "name": "نام",
+  "notification": {
+    "success": {
+      "title": "موفق",
+      "family_created": "خانواده با موفقیت ذخیره شد"
+    }
+  },
+  "select": {
+    "placeholder": "انتخاب"
+  },
+  "severity": {
+    "case": "کیس",
+    "critical": "حساس",
+    "label": "حساسیت",
+    "poor": "فقیر"
+  },
+  "submit": "ثبت"
 }
