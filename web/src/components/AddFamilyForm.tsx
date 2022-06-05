@@ -1,5 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Group, Select, Stack, TextInput, Title } from '@mantine/core';
+import {
+  Button,
+  Divider,
+  Group,
+  Radio,
+  RadioGroup,
+  Select,
+  Stack,
+  TextInput,
+  Title,
+} from '@mantine/core';
 import type { FieldError } from 'react-hook-form';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -16,14 +26,13 @@ const filedError = (t: any, error: FieldError | undefined) =>
 
 interface Props {
   onSuccess?: (value: Family) => void;
-  onError?: (e) => void;
+  onError?: (e: unknown) => void;
 }
 
 export const AddFamilyForm: React.FC<Props> = ({ onSuccess, onError }) => {
   const { t } = useTranslation();
   const form = useForm<CreateFamilyFields>({
     resolver: zodResolver(familySchema),
-    defaultValues: { name: '', severity: undefined },
   });
   const [createFamily] = useCreateFamilyMutation();
 
@@ -47,6 +56,7 @@ export const AddFamilyForm: React.FC<Props> = ({ onSuccess, onError }) => {
             placeholder={t('name')}
             {...form.register('name')}
             error={filedError(t, form.formState.errors['name'])}
+            required
           />
 
           <Controller
@@ -62,10 +72,30 @@ export const AddFamilyForm: React.FC<Props> = ({ onSuccess, onError }) => {
                 }))}
                 {...field}
                 error={filedError(t, fieldState.error)}
+                required
               />
             )}
           />
 
+          <Divider label="سرپرست" />
+          <TextInput
+            label={t('name')}
+            placeholder={t('name')}
+            {...form.register('household.name')}
+            error={filedError(t, form.formState.errors['household.name'])}
+            required
+          />
+          <TextInput
+            label={t('lastName')}
+            placeholder={t('lastName')}
+            {...form.register('household.lastName')}
+            error={filedError(t, form.formState.errors['household.lastName'])}
+            required
+          />
+          <RadioGroup label={t('gender')} required size="xs">
+            <Radio value="male" label={t('male')} />
+            <Radio value="female" label={t('female')} />
+          </RadioGroup>
           <Group position="right" mt="md">
             <Button type="submit">{t('submit')}</Button>
           </Group>
