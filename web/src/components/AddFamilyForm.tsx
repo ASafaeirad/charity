@@ -1,6 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Group, Select, Stack, TextInput, Title } from '@mantine/core';
-import { showNotification } from '@mantine/notifications';
 import type { FieldError } from 'react-hook-form';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -9,12 +8,18 @@ import { useCreateFamilyMutation } from '../api/familyApiSlice';
 import type { CreateFamilyFields } from '../api/familyDto';
 import { toFamilyDto } from '../api/familyDto';
 import { familySchema } from '../api/familySchema';
+import type { Family } from '../generated';
 import { createFamilyDtoSeverities } from '../generated';
 
 const filedError = (t: any, error: FieldError | undefined) =>
   error ? t(`errors:${error.message}`) : null;
 
-export const AddFamilyPage: React.FC = () => {
+interface Props {
+  onSuccess?: (value: Family) => void;
+  onError?: (e) => void;
+}
+
+export const AddFamilyForm: React.FC<Props> = ({ onSuccess, onError }) => {
   const { t } = useTranslation();
   const form = useForm<CreateFamilyFields>({
     resolver: zodResolver(familySchema),
@@ -23,13 +28,13 @@ export const AddFamilyPage: React.FC = () => {
   const [createFamily] = useCreateFamilyMutation();
 
   const handleSubmit = form.handleSubmit((values) => {
-    createFamily(toFamilyDto(values)).then(() => {
-      form.reset();
-      showNotification({
-        title: t('notification.success.title'),
-        message: t('notification.success.family_created'),
-      });
-    });
+    createFamily(toFamilyDto(values))
+      .unwrap()
+      .then((res) => {
+        form.reset();
+        onSuccess?.(res);
+      })
+      .catch(onError);
   });
 
   return (

@@ -49,9 +49,7 @@ export interface MemberGender {
   [key: string]: any;
 }
 
-export interface FamilySeverity {
-  [key: string]: any;
-}
+export type FamilySeverity = CreateFamilyDtoSeverity;
 
 export type FamilyHousehold = Member | null;
 
